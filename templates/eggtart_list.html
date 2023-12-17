@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <link rel = "stylesheet" href="{% static 'css/style.css/style.css' %}">
+</head>
+<body>
+    <div id = "navbar">
+        <span>_에그맛집_ 의 목록입니다.</span>
+    </div>
+    <div id = "post-list">
+        <ul class = "posts">
+            {% for eggtart in eggtart %}
+                <li class="post">
+                    <div>{{ eggtart.shop }}</div>
+                    <p>위치 : {{ eggtart.location}}</p>
+                    <p>가격 : {{ eggtart.price }}원</p>
+                    <ul class = "comments">
+                        {% for comment in eggtart.comment_set.all %}
+                            <li class = "comment">{{ comment.content }}</li>
+                        {% empty %}
+                            <li class = "comment-empty">아직 댓글이 없습니다.</li>
+                        {% endfor %}
+                    </ul>
+                    <img src = "{{ eggtart.thumbnail.url }}" alt = "">
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
